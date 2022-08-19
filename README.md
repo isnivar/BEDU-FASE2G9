@@ -11,3 +11,5 @@ Equipo 9:
 Herramientas:
     * VS Code
     * Bootstrap
+
+Clon de Keny Almazán para comenzar a trabajar con el front
