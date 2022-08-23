@@ -1,14 +1,27 @@
-const path = require('path')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/js/main.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+  entry: {
+    bundle: './src/js/main.js'
   },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+        title: 'Webpack App',
+        filename: 'index.html',
+        template: './src/index.html'
+    })
+],
   devServer: {
-    static: path.resolve(__dirname, 'dist'),
-    port: 8080,
+    static: {
+        directory: path.resolve(__dirname, 'dist')
+    },
+    port: 3000,
+    open: true,
     hot: true
   },
   module: {
@@ -36,6 +49,15 @@ module.exports = {
             loader: 'sass-loader'
           }
         ]
+      },
+      {
+        test: /\.js$/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env']
+            }
+        }
       }
     ]
   }
