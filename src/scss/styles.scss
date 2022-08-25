@@ -1,0 +1,18 @@
+@import "~bootstrap/scss/bootstrap";
+
+.bg-orange{
+    background-color: rgb(184, 58, 0);
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 2rem;
+}
+
+.navbar-brand:hover {
+    color: lightsteelblue;
+}
+
+.nav-link {
+    color: white;
+}
