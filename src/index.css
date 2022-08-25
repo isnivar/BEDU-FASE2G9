@@ -1,0 +1,40 @@
+.bg-orange {
+  background-color: rgb(184, 58, 0);
+}
+
+.navbar-brand {
+  color: white;
+  font-size: 2rem;
+}
+
+.navbar-brand:hover {
+  color: lightsteelblue;
+}
+
+.nav-link {
+  color: white;
+}
+
+#meals {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+#meals .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin: 1rem;
+}
+#meals .card img {
+  border-radius: 30%;
+  width: 40%;
+}
+#meals .card .card-body {
+  display: flex;
+  font-size: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*# sourceMappingURL=index.css.map */
