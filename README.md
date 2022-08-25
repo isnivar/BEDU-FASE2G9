@@ -5,7 +5,7 @@ Equipo 9:
     *
     *
     *
-    *
+    * Isidro Salvador Briones Torres
     * Ricardo Contreras Juárez
 
 Herramientas:
