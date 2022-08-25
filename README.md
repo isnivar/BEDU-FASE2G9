@@ -5,11 +5,11 @@ Equipo 9:
     *
     *
     *
-    *
+    * Isidro Salvador Briones Torres
     * Ricardo Contreras Juárez
 
 Herramientas:
-    * VS Code
-    * Bootstrap
+_ VS Code
+_ Bootstrap
 
 Clon de Keny Almazán para comenzar a trabajar con el front
