@@ -36,81 +36,9 @@
         </form>
     </section>
 
-    <section id="categorias" class="container-fluid mt-4">
+    <section id="categorias" class="container mt-4">
       <h2>What would you like to eat?</h2>
     </section>
-    <section id="meals" class="container-fluid mt-4">
-
-    </section>
-    <script type="text/javascript" src="./js/meals.js"></script>
-    <script>
-
-      const createCard = (src, title, id) => {
-        //created the container of the card.
-        let card = document.createElement('div');
-        card.className = 'card';
-        // here we create the card header
-        let cardHeader = document.createElement('img');
-        cardHeader.className = 'card-img-top';
-        cardHeader.src = src
-        cardHeader.style = 'width: 10%;'
-        card.appendChild(cardHeader);
-        //here we create the body of the card
-        let cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
-        let cardTitle = document.createElement('h5');
-        cardTitle.className = 'card-title'
-        cardTitle.appendChild(document.createTextNode(title));
-        let expandMeal = document.createElement('a')
-        expandMeal.className = 'btn btn-light';
-        expandMeal.appendChild(document.createTextNode('See entire recipe'))
-        cardBody.appendChild(cardTitle);
-        cardBody.appendChild(expandMeal);
-        
-        card.appendChild(cardBody);
-
-        return card;
-      }
-
-      const getMealsByCategory = async (category) => {
-        let meals = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c='+category).then((res)=> res.json())
-          .then(({meals}) => meals)
-          .catch(e => "Error fetching meals.");
-
-        let showMeals = document.getElementById('meals');
-
-        for(meal of meals){
-          showMeals.appendChild(createCard(meal.strMealThumb, meal.strMeal))
-        }
-      }
-
-      const showCategories = async () => {
-        let categories = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php').then((res)=> res.json())
-          .then(({categories}) => categories)
-          .catch(e => "Error fetching categories.");
-        
-        let cardsCon = document.getElementById('categorias');
-        if(categories.length > 0 && typeof categories === 'object'){
-          for(element of categories){
-            let categoryBtn = document.createElement('button');
-            const text = document.createTextNode(element.strCategory);
-            categoryBtn.appendChild(text);
-            categoryBtn.className= "m-1 btn";
-            categoryBtn.id = `${element.strCategory}_${element.idCategory}`
-            let cat = element.strCategory;
-            categoryBtn.addEventListener('click', () => getMealsByCategory(cat))
-            cardsCon.appendChild(categoryBtn);
-          };
-        }else{
-          console.error(categories)
-          let errorMsg = document.createElement('div');
-          errorMsg.className = "alert alert-danger";
-          const text = document.createTextNode(categories);
-          errorMsg.appendChild(text);
-          cardsCon.appendChild(errorMsg);
-        }
-      }
-      showCategories();
-    </script>
+    <section id="meals" class="container mt-4 custom-grid"></section>
   </body>
 </html>
