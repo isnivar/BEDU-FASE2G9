@@ -4,8 +4,8 @@ Equipo 9:
 
     *
     *
-    *
-    *
+    * Israel Nicolas Vallejo Barboza
+    * Isidro Salvador Briones Torres
     * Ricardo Contreras Juárez
 
 Herramientas:

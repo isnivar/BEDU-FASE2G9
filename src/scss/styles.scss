@@ -16,3 +16,8 @@
 .nav-link {
     color: white;
 }
+
+.custom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
