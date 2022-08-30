@@ -13,13 +13,17 @@ export const createCard = (src, title, id) => {
     let cardTitle = document.createElement('h5');
     cardTitle.className = 'card-title'
     cardTitle.appendChild(document.createTextNode(title));
-    let expandMeal = document.createElement('a')
-    expandMeal.className = 'btn btn-light';
-    expandMeal.appendChild(document.createTextNode('See entire recipe'))
     cardBody.appendChild(cardTitle);
-    cardBody.appendChild(expandMeal);
     
     card.appendChild(cardBody);
 
     return card;
 }
+
+export function buildUrl(endpoint, param) {
+    const baseUrl = "https://www.themealdb.com/api/json/v1/1/";
+    if(param == null || param == ""){
+        return baseUrl + endpoint + ".php";
+    }
+    return baseUrl + endpoint + ".php?" + param + "=";
+  }
