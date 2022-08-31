@@ -45,3 +45,15 @@
   --bs-btn-hover-border-color: #{shade-color(rgb(121, 102, 17), 10%)};
   --bs-btn-focus-shadow-rgb: rgb(209, 186, 86);
 }
+
+.btn-card {
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: rgb(0, 0, 0);
+  --bs-btn-bg: rgb(255, 255, 255);
+  --bs-btn-border-color: rgb(255, 255, 255);
+  --bs-btn-border-radius: 0.5rem;
+  --bs-btn-hover-color: rgb(0, 0, 0);
+  --bs-btn-hover-bg: #{shade-color(rgb(255, 255, 255), 0%)};
+  --bs-btn-hover-border-color: #{shade-color(rgb(255, 255, 255), 0%)};
+  --bs-btn-focus-shadow-rgb: rgb(255, 255, 255);
+}

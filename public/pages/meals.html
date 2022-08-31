@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="recipeBook.html">Recetario</a>
+              <a class="nav-link" href="meals.html">Recetario</a>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto">
@@ -37,7 +37,7 @@
     <div class="input-group has-validation">
       <div class="form-floating" id="input">
         <input type="text" class="form-control" id="recipe" placeholder="Example: rice" required>
-        <label for="recipe">Introduzca el nombre de la receta</label>
+        <label for="recipe">Introduzca el nombre o código de la receta</label>
       </div>
       <div class="invalid-feedback">
         <label>Por vavor, introduzca el nombre de una receta</label>
@@ -53,14 +53,17 @@
     <div>
       <h2>Recipes:</h2>
     </div>
-    <div class="card-group custom-grid" id="results">
+    <div class="row" id="mealResults">
     </div>
   </section>
 
   <section id="categorias" class="container mt-4">
     <h2>What would you like to eat?</h2>
   </section>
-  <section id="meals" class="container mt-4 custom-grid"></section>
+  <section class="container mt-4">
+    <div class="row" id="meals">
+    </div>
+  </section>
 </body>
 
 </html>

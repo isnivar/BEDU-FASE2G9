@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: {
     bundle: "./src/js/main.js",
-    recipes: "./src/js/recipes.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -14,18 +13,18 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Home",
       filename: "index.html",
-      template: "./src/index.html",
+      template: "./public/index.html",
     }),
     new HtmlWebpackPlugin({
       title: "Team",
-      filename: "team.html",
-      template: "./src/pages/team.html",
+      filename: "pages/team.html",
+      template: "./public/pages/team.html",
     }),
     new HtmlWebpackPlugin({
-      title: "RecipeBook",
-      filename: "recipeBook.html",
-      template: "./src/pages/recipeBook.html",
-    }),
+      title: "Meals",
+      filename: "pages/meals.html",
+      template: "./public/pages/meals.html",
+    })
   ],
   devServer: {
     static: {
@@ -34,6 +33,9 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
+  },
+  resolve: {
+    extensions: [".js"],
   },
   module: {
     rules: [
@@ -51,23 +53,24 @@ module.exports = {
             options: {
               postcssOptions: {
                 plugins: () => [require("autoprefixer")],
-              },
-            },
+              }
+            }
           },
           {
             loader: "sass-loader",
-          },
-        ],
+          }
+        ]
       },
       {
-        test: /\.js$/,
+        test: /\.m?js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
           },
         },
-      },
-    ],
-  },
+      }
+    ]
+  }
 };
