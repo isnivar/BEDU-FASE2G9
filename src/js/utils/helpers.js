@@ -1,4 +1,39 @@
-export const createCard = (src, id, title, instructions, measures, ingredients) => {
+export const createCardCategories = (
+  src,
+  title
+) => {
+  let col = document.createElement("div");
+  col.className = "col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mb-3";
+  //created the container of the card.
+  let card = document.createElement("div");
+  card.className = "card h-100";
+  // here we create the card header
+  let cardHeader = document.createElement("img");
+  cardHeader.className = "card-img-top";
+  cardHeader.src = src;
+  card.appendChild(cardHeader);
+  //here we create the body of the card
+  let cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+  let cardTitle = document.createElement("h5");
+  cardTitle.className = "card-title";
+  cardTitle.appendChild(document.createTextNode(title));
+
+  cardBody.appendChild(cardTitle);
+  card.appendChild(cardBody);
+  col.appendChild(card);
+
+  return col;
+};
+
+export const createCardMeals = (
+  src,
+  id,
+  title,
+  instructions,
+  measures,
+  ingredients
+) => {
   let col = document.createElement("div");
   col.className = "col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mb-3";
   //created the container of the card.
@@ -32,92 +67,102 @@ export const createCard = (src, id, title, instructions, measures, ingredients) 
   return col;
 };
 
-export const createModal = (id, mealName, instructions, measures, ingredients) => {
-    let modal = document.createElement("div");
-    modal.className = "modal fade";
-    modal.id = ("modal" + id);
-    modal.tabIndex = -1;
-    modal.setAttribute("aria-labelledby", ("modalScrollableTitle" + id));
-    modal.setAttribute("aria-hidden", true);
-    modal.style = "display: none;";
+export const createModal = (
+  id,
+  mealName,
+  instructions,
+  measures,
+  ingredients
+) => {
+  let modal = document.createElement("div");
+  modal.className = "modal fade";
+  modal.id = "modal" + id;
+  modal.tabIndex = -1;
+  modal.setAttribute("aria-labelledby", "modalScrollableTitle" + id);
+  modal.setAttribute("aria-hidden", true);
+  modal.style = "display: none;";
 
-        let modalDialog = document.createElement("div");
-        modalDialog.className = "modal-dialog modal-dialog-scrollable";
+  let modalDialog = document.createElement("div");
+  modalDialog.className = "modal-dialog modal-dialog-scrollable";
 
-            let modalContent = document.createElement("div");
-            modalContent.className = "modal-content";
+  let modalContent = document.createElement("div");
+  modalContent.className = "modal-content";
 
-                let modalHeader = document.createElement("div");
-                modalHeader.className = "modal-header";
+  let modalHeader = document.createElement("div");
+  modalHeader.className = "modal-header";
 
-                let title = document.createElement("h5");
-                title.className = "modal-title";
-                title.id = ("modalScrollableTitle" + id);
-                title.appendChild(document.createTextNode(mealName));
+  let title = document.createElement("h5");
+  title.className = "modal-title";
+  title.id = "modalScrollableTitle" + id;
+  title.appendChild(document.createTextNode(mealName));
 
-                let btnClose = document.createElement("button");
-                btnClose.type = "button";
-                btnClose.className = "btn-close";
-                btnClose.setAttribute("data-bs-dismiss", "modal");
-                btnClose.setAttribute("aria-label", "Close");
+  let btnClose = document.createElement("button");
+  btnClose.type = "button";
+  btnClose.className = "btn-close";
+  btnClose.setAttribute("data-bs-dismiss", "modal");
+  btnClose.setAttribute("aria-label", "Close");
 
-                modalHeader.appendChild(title);
-                modalHeader.appendChild(btnClose);
+  modalHeader.appendChild(title);
+  modalHeader.appendChild(btnClose);
 
-                let modalBody = document.createElement("div");
-                modalBody.className = "modal-body";
-                modalBody.appendChild(document.createTextNode(instructions));
-                modalBody.appendChild(document.createTextNode(measures));
-                modalBody.appendChild(document.createTextNode(ingredients));
+  let modalBody = document.createElement("div");
+  modalBody.className = "modal-body";
+  modalBody.appendChild(document.createTextNode(instructions));
+  modalBody.appendChild(document.createTextNode(measures));
+  modalBody.appendChild(document.createTextNode(ingredients));
 
-            modalContent.appendChild(modalHeader);
-            modalContent.appendChild(modalBody);
-        modalDialog.appendChild(modalContent);
-    modal.appendChild(modalDialog);
-  
-    return modal;
-  };
+  modalContent.appendChild(modalHeader);
+  modalContent.appendChild(modalBody);
+  modalDialog.appendChild(modalContent);
+  modal.appendChild(modalDialog);
 
-export function createCardMeal(webElement, data) {
-    console.log("Creamos la card de la receta");
-    webElement.replaceChildren();
-    data.forEach((meal) => {
-        webElement.appendChild(
-        createCard(
-            meal.strMealThumb,
-            meal.idMeal,
-            meal.strMeal,
-            meal.strInstructions,
-            getMeasures(meal),
-            getIngredients(meal)
-        )
-        );
+  return modal;
+};
+
+export function createCard(webElement, data) {
+  console.log("Creamos la card de la receta");
+  webElement.replaceChildren();
+  data.forEach((meal) => {
+    webElement.appendChild(
+      createCardMeals(
+        meal.strMealThumb,
+        meal.idMeal,
+        meal.strMeal,
+        meal.strInstructions,
+        getMeasures(meal),
+        getIngredients(meal)
+      )
+    );
   });
 }
 
 function getMeasures(data) {
-        let newMeal = Object.entries(data);
-        return newMeal.filter(measure => measure[0].startsWith("strMeasure") && measure[1] !== " ");
-        //console.log(newMeal[32][0].startsWith("strMeasure"));
+  let newMeal = Object.entries(data);
+  return newMeal.filter(
+    (measure) => measure[0].startsWith("strMeasure") && measure[1] !== " "
+  );
 }
 
 function getIngredients(data) {
-    let newMeal = Object.entries(data);
-    return newMeal.filter(ingredients => ingredients[0].startsWith("strIngredient") && ingredients[1] !== "");
-    //console.log(newMeal[32][0].startsWith("strMeasure"));
+  let newMeal = Object.entries(data);
+  return newMeal.filter(
+    (ingredients) =>
+      ingredients[0].startsWith("strIngredient") && ingredients[1] !== ""
+  );
 }
 
 export function createLabelNotFound(webElement) {
-    const labelNotFound = document.createElement("label");
-    labelNotFound.innerHTML = "No se encontraron resultados para los criterios de búsqueda!";
-    webElement.replaceChildren();
-    webElement.appendChild(labelNotFound);
-  }
+  const labelNotFound = document.createElement("label");
+  labelNotFound.innerHTML =
+    "No se encontraron resultados para los criterios de búsqueda!";
+  webElement.replaceChildren();
+  webElement.appendChild(labelNotFound);
+}
 
-  export function buildUrl(endpoint, param) {
-    const baseUrl = "https://www.themealdb.com/api/json/v1/1/";
-    if (param == null || param == "") {
-      return baseUrl + endpoint + ".php";
-    }
-    return baseUrl + endpoint + ".php?" + param + "=";
+export function buildUrl(endpoint, param) {
+  const baseUrl = "https://www.themealdb.com/api/json/v1/1/";
+  if (param == null || param == "") {
+    return baseUrl + endpoint + ".php";
   }
+  return baseUrl + endpoint + ".php?" + param + "=";
+}

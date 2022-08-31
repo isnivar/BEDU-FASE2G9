@@ -11,7 +11,7 @@ async function getMeals(endpoint, param) {
   return fetch(helpers.buildUrl(endpoint, param) + data)
     .then((response) => response.json())
     .then((data) => {
-      helpers.createCardMeal(mealResults, data.meals);
+      helpers.createCard(mealResults, data.meals);
     })
     .catch(function (err) {
       if (data.meals == null) {
@@ -42,7 +42,7 @@ const getMealsByCategory = async (category) => {
   let showMeals = document.getElementById("meals");
   showMeals.replaceChildren();
   meals.forEach((meal) => {
-    helpers.createCardMeal(showMeals, meals);
+    showMeals.appendChild(helpers.createCardCategories(meal.strMealThumb, meal.strMeal));
   });
 };
 
