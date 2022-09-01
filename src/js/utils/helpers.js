@@ -151,10 +151,32 @@ function getIngredients(data) {
   );
 }
 
+export function createLabelTotalMeals(webElement, criteria, total, endpoint) {
+  const labelTotalMeals = document.createElement("label");
+  labelTotalMeals.replaceChildren();
+  if(endpoint === 'random'){
+    labelTotalMeals.innerHTML = "Si no sabes que comer te recomendamos:";
+    webElement.replaceChildren();
+    webElement.appendChild(labelTotalMeals);
+  } else if(total >= 2){
+    labelTotalMeals.innerHTML = "Se encontrarón (" + total + ") coincidencias para: " + criteria;
+    webElement.replaceChildren();
+    webElement.appendChild(labelTotalMeals);
+  } else if(total === 1){
+    labelTotalMeals.innerHTML = "Se encontró (" + total + ") coincidencia para: " + criteria;
+    webElement.replaceChildren();
+    webElement.appendChild(labelTotalMeals);
+  } else{
+    labelTotalMeals.innerHTML = "No se encontraron coincidencias para: " + criteria;
+    webElement.replaceChildren();
+    webElement.appendChild(labelTotalMeals);
+  }
+}
+
 export function createLabelNotFound(webElement) {
   const labelNotFound = document.createElement("label");
   labelNotFound.innerHTML =
-    "No se encontraron resultados para los criterios de búsqueda!";
+    "Le recomendamos cambiar los criterios de búsqueda, si se le complica búscar una receta, haga click sobre el botón de 'Búscar receta aleatoriamente', y nosotros le recomendaremos una receta. Tambíen puedes revisar nuestra sección de abajo y búscar por la categoria que más se te apetesca.";
   webElement.replaceChildren();
   webElement.appendChild(labelNotFound);
 }
