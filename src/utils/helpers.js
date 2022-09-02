@@ -1,12 +1,11 @@
-export const createCardCategories = (
-  src,
-  title
-) => {
+export const createCardCategories = ( src, title, mealInfo ) => {
   let col = document.createElement("div");
   col.className = "col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mb-3";
   //created the container of the card.
   let card = document.createElement("div");
-  card.className = "card h-100";
+  card.className = "card h-100 btn-card stretched-link";
+  card.setAttribute("data-bs-toggle", "modal");
+  card.setAttribute("data-bs-target", "#modal" + mealInfo.idMeal);
   // here we create the card header
   let cardHeader = document.createElement("img");
   cardHeader.className = "card-img-top";
@@ -22,18 +21,18 @@ export const createCardCategories = (
   cardBody.appendChild(cardTitle);
   card.appendChild(cardBody);
   col.appendChild(card);
-
+  col.appendChild(createModal1(mealInfo));
+  // card.onclick = (() => {
+  //   let col = document.getElementById(`${id}`);
+  //   let colModal = document.getElementById(`modal${id}`);
+  //   console.log(newModal);
+  //   col.replaceChild(newModal, colModal);
+  // })
+  
   return col;
 };
 
-export const createCardMeals = (
-  src,
-  id,
-  title,
-  instructions,
-  measures,
-  ingredients
-) => {
+export const createCardMeals = ( src, id, title, instructions, measures, ingredients ) => {
   let col = document.createElement("div");
   col.className = "col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mb-3";
   //created the container of the card.
@@ -67,13 +66,7 @@ export const createCardMeals = (
   return col;
 };
 
-export const createModal = (
-  id,
-  mealName,
-  instructions,
-  measures,
-  ingredients
-) => {
+export const createModal = ( id, mealName, instructions, measures, ingredients ) => {
   let modal = document.createElement("div");
   modal.className = "modal fade";
   modal.id = "modal" + id;
@@ -119,8 +112,56 @@ export const createModal = (
   return modal;
 };
 
+const createModal1 = ( mealData ) => {
+  let ingredients = getIngredients(mealData);
+  let measures = getMeasures(mealData);
+  let modal = document.createElement("div");
+  modal.className = "modal fade modal-lg";
+  modal.id = "modal" + mealData.idMeal;
+  modal.tabIndex = -1;
+  modal.setAttribute("aria-labelledby", "modalScrollableTitle" + mealData.idMeal);
+  modal.setAttribute("aria-hidden", true);
+  modal.style = "display: none;";
+
+  let modalDialog = document.createElement("div");
+  modalDialog.className = "modal-dialog modal-dialog-scrollable";
+
+  let modalContent = document.createElement("div");
+  modalContent.className = "modal-content";
+
+  let modalHeader = document.createElement("div");
+  modalHeader.className = "modal-header";
+
+  let title = document.createElement("h3");
+  title.className = "modal-title";
+  title.id = "modalScrollableTitle" + mealData.idMeal;
+  title.appendChild(document.createTextNode(mealData.strMeal));
+  
+  let btnClose = document.createElement("button");
+  btnClose.type = "button";
+  btnClose.className = "btn-close";
+  btnClose.setAttribute("data-bs-dismiss", "modal");
+  btnClose.setAttribute("aria-label", "Close");
+  
+  
+  modalHeader.appendChild(title);
+  modalHeader.appendChild(btnClose);
+
+  let modalBody = document.createElement("div");
+  modalBody.className = "modal-body";
+  modalBody.appendChild(document.createTextNode(mealData.strInstructions));
+  modalBody.appendChild(document.createTextNode(measures));
+  modalBody.appendChild(document.createTextNode(ingredients));
+
+  modalContent.appendChild(modalHeader);
+  modalContent.appendChild(modalBody);
+  modalDialog.appendChild(modalContent);
+  modal.appendChild(modalDialog);
+  
+  return modal;
+};
+
 export function createCard(webElement, data) {
-  console.log("Creamos la card de la receta");
   webElement.replaceChildren();
   data.forEach((meal) => {
     webElement.appendChild(
