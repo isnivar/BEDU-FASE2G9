@@ -43,7 +43,6 @@ const getMealsByCategory = async (category) => {
     showMeals.replaceChildren();
     meals.forEach(async (meal) => {
     let mealDesc = await getMealById(meal.idMeal);
-    console.log(mealDesc)
     showMeals.appendChild(helpers.createCardCategories(meal.strMealThumb, meal.strMeal, mealDesc));
   });
 };

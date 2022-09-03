@@ -21,13 +21,8 @@ export const createCardCategories = ( src, title, mealInfo ) => {
   cardBody.appendChild(cardTitle);
   card.appendChild(cardBody);
   col.appendChild(card);
-  col.appendChild(createModal1(mealInfo));
-  // card.onclick = (() => {
-  //   let col = document.getElementById(`${id}`);
-  //   let colModal = document.getElementById(`modal${id}`);
-  //   console.log(newModal);
-  //   col.replaceChild(newModal, colModal);
-  // })
+
+  col.appendChild(createModal(mealInfo.idMeal, mealInfo.strMeal, mealInfo.strInstructions , getMeasures(mealInfo), getIngredients(mealInfo)));
   
   return col;
 };
@@ -66,7 +61,7 @@ export const createCardMeals = ( src, id, title, instructions, measures, ingredi
   return col;
 };
 
-export const createModal = ( id, mealName, instructions, measures, ingredients ) => {
+export const createModal = ( id, mealName, instructions, measures, ingredients, img ) => {
   let modal = document.createElement("div");
   modal.className = "modal fade";
   modal.id = "modal" + id;
@@ -84,58 +79,10 @@ export const createModal = ( id, mealName, instructions, measures, ingredients )
   let modalHeader = document.createElement("div");
   modalHeader.className = "modal-header";
 
-  let title = document.createElement("h5");
+  let title = document.createElement("h3");
   title.className = "modal-title";
   title.id = "modalScrollableTitle" + id;
   title.appendChild(document.createTextNode(mealName));
-
-  let btnClose = document.createElement("button");
-  btnClose.type = "button";
-  btnClose.className = "btn-close";
-  btnClose.setAttribute("data-bs-dismiss", "modal");
-  btnClose.setAttribute("aria-label", "Close");
-
-  modalHeader.appendChild(title);
-  modalHeader.appendChild(btnClose);
-
-  let modalBody = document.createElement("div");
-  modalBody.className = "modal-body";
-  modalBody.appendChild(document.createTextNode(instructions));
-  modalBody.appendChild(document.createTextNode(measures));
-  modalBody.appendChild(document.createTextNode(ingredients));
-
-  modalContent.appendChild(modalHeader);
-  modalContent.appendChild(modalBody);
-  modalDialog.appendChild(modalContent);
-  modal.appendChild(modalDialog);
-
-  return modal;
-};
-
-const createModal1 = ( mealData ) => {
-  let ingredients = getIngredients(mealData);
-  let measures = getMeasures(mealData);
-  let modal = document.createElement("div");
-  modal.className = "modal fade modal-lg";
-  modal.id = "modal" + mealData.idMeal;
-  modal.tabIndex = -1;
-  modal.setAttribute("aria-labelledby", "modalScrollableTitle" + mealData.idMeal);
-  modal.setAttribute("aria-hidden", true);
-  modal.style = "display: none;";
-
-  let modalDialog = document.createElement("div");
-  modalDialog.className = "modal-dialog modal-dialog-scrollable";
-
-  let modalContent = document.createElement("div");
-  modalContent.className = "modal-content";
-
-  let modalHeader = document.createElement("div");
-  modalHeader.className = "modal-header";
-
-  let title = document.createElement("h3");
-  title.className = "modal-title";
-  title.id = "modalScrollableTitle" + mealData.idMeal;
-  title.appendChild(document.createTextNode(mealData.strMeal));
   
   let btnClose = document.createElement("button");
   btnClose.type = "button";
@@ -143,15 +90,14 @@ const createModal1 = ( mealData ) => {
   btnClose.setAttribute("data-bs-dismiss", "modal");
   btnClose.setAttribute("aria-label", "Close");
   
-  
   modalHeader.appendChild(title);
   modalHeader.appendChild(btnClose);
 
   let modalBody = document.createElement("div");
   modalBody.className = "modal-body";
-  modalBody.appendChild(document.createTextNode(mealData.strInstructions));
-  modalBody.appendChild(document.createTextNode(measures));
-  modalBody.appendChild(document.createTextNode(ingredients));
+  
+  modalBody.appendChild(ingredientsSection(ingredients, measures));
+  modalBody.appendChild(instructionsSection(instructions));
 
   modalContent.appendChild(modalHeader);
   modalContent.appendChild(modalBody);
@@ -160,6 +106,47 @@ const createModal1 = ( mealData ) => {
   
   return modal;
 };
+
+const ingredientsSection = (ingredients, measures) => {
+  const ingredientsList = document.createElement('div');
+  ingredientsList.className = 'container-fluid';
+
+  const title = document.createElement('h4');
+  title.appendChild(document.createTextNode('Ingredients'));
+  ingredientsList.appendChild(title);
+
+  const uList = document.createElement('ul');
+
+  ingredients.forEach((ingredient, index) => {
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(`${measures[index]} ${ingredient}`));
+    uList.appendChild(li); 
+  })
+
+  ingredientsList.appendChild(uList);
+  ingredientsList.appendChild(document.createElement('hr'))
+
+  return ingredientsList;
+}
+
+const instructionsSection = (instructions) => {
+  let instructionsList = document.createElement('div');
+  instructionsList.className = 'container-fluid';
+  let newList = instructions.split(/[0-9]+[.]/);
+
+  let ul = document.createElement('ol');
+  if(newList[0].length === 0)newList.splice(0, 1);
+  
+  newList.forEach((step) => {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(step));
+    ul.appendChild(li);
+  });
+  
+  instructionsList.appendChild(ul);
+
+  return instructionsList;
+}
 
 export function createCard(webElement, data) {
   webElement.replaceChildren();
@@ -179,17 +166,20 @@ export function createCard(webElement, data) {
 
 function getMeasures(data) {
   let newMeal = Object.entries(data);
-  return newMeal.filter(
-    (measure) => measure[0].startsWith("strMeasure") && measure[1] !== " "
-  );
+  let measuresList = newMeal.filter((measure) => measure[0].startsWith("strMeasure") && measure[1] !== " ");
+
+  const measures = measuresList.map(measure => measure[1]);
+
+  return measures;
 }
 
 function getIngredients(data) {
   let newMeal = Object.entries(data);
-  return newMeal.filter(
-    (ingredients) =>
-      ingredients[0].startsWith("strIngredient") && ingredients[1] !== ""
-  );
+  let ingredientsList = newMeal.filter((ingredients) => ingredients[0].startsWith("strIngredient") && ingredients[1] !== "");
+
+  const ingredients = ingredientsList.map(ingredient => ingredient[1]);
+  
+  return ingredients;
 }
 
 export function createLabelNotFound(webElement) {
