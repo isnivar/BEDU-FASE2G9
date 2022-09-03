@@ -13,14 +13,13 @@ async function getMeals(endpoint, param) {
   return fetch(helpers.buildUrl(endpoint, param) + meal)
     .then((response) => response.json())
     .then((data) => {
-      console.log("Se crean las cards con los resultados");
       meals = data.meals;
       helpers.createLabelTotalMeals(totalMeals, meal, meals.length, endpoint);
       helpers.createCard(mealResults, meals);
     })
     .catch(function (err) {
       if (meals == null) {
-        console.log("No se encontraron resultados");
+        console.log("Not found");
         helpers.createLabelTotalMeals(totalMeals, meal);
         helpers.createLabelNotFound(mealResults);
       } else {
