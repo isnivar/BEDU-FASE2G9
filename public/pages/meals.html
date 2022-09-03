@@ -33,25 +33,25 @@
   </header>
 
   <section class="container mt-4">
-    <label>Search recipes</label>
+    <label class="form-label">Búscar recetas</label>
     <div class="input-group has-validation">
       <div class="form-floating" id="input">
-        <input type="text" class="form-control" id="recipe" placeholder="Example: rice" required>
-        <label for="recipe">Introduce the name of the meal</label>
+        <input type="text" class="form-control" id="recipe" placeholder="Example: rice" required autocomplete="off">
+        <label for="recipe">Introduzca el nombre o código de la receta</label>
       </div>
       <div class="invalid-feedback">
         <label>Por vavor, introduzca el nombre de una receta</label>
       </div>
     </div>
     <div class="mt-4">
-      <button type="submit" class="btn btn-bd-primary" id="searchRecipe">Search</button>
-      <button type="submit" class="btn btn-bd-secondary" id="random">Random recipe</button>
+      <button type="submit" class="btn btn-bd-primary" id="searchRecipe">Búscar recetas</button>
+      <button type="submit" class="btn btn-bd-secondary" id="random">Búscar receta aleatoriamente</button>
     </div>
   </section>
 
   <section class="container mt-4">
     <div>
-      <h2>Recipes:</h2>
+      <h3 id="totalMeals"></h3>
     </div>
     <div class="row" id="mealResults">
     </div>
