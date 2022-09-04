@@ -19,12 +19,12 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="meals.html">Recetario</a>
+              <a class="nav-link" href="meals.html">Recipe book</a>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="team.html">Equipo</a>
+              <a class="nav-link" href="team.html">Team</a>
             </li>
           </ul>
         </div>
@@ -33,25 +33,25 @@
   </header>
 
   <section class="container mt-4">
-    <label>Búscar recetas</label>
+    <label class="form-label">Search recipes</label>
     <div class="input-group has-validation">
       <div class="form-floating" id="input">
-        <input type="text" class="form-control" id="recipe" placeholder="Example: rice" required>
-        <label for="recipe">Introduzca el nombre o código de la receta</label>
+        <input type="text" class="form-control" id="recipe" placeholder="Example: rice" required autocomplete="off">
+        <label for="recipe">Introduce the name or code of the meal</label>
       </div>
       <div class="invalid-feedback">
-        <label>Por vavor, introduzca el nombre de una receta</label>
+        <label>Please, introduce the name of the recipe</label>
       </div>
     </div>
     <div class="mt-4">
-      <button type="submit" class="btn btn-bd-primary" id="searchRecipe">Búscar</button>
-      <button type="submit" class="btn btn-bd-secondary" id="random">Receta random</button>
+      <button type="submit" class="btn btn-bd-primary" id="searchRecipe">Search</button>
+      <button type="submit" class="btn btn-bd-secondary" id="random">Search aleatory recipe</button>
     </div>
   </section>
 
   <section class="container mt-4">
     <div>
-      <h2>Recipes:</h2>
+      <h3 id="totalMeals"></h3>
     </div>
     <div class="row" id="mealResults">
     </div>
@@ -61,9 +61,7 @@
     <h2>What would you like to eat?</h2>
   </section>
   <section class="container mt-4">
-    <div class="row" id="meals">
-    </div>
+    <div class="row" id="meals"></div>
   </section>
 </body>
-
 </html>
