@@ -1,4 +1,4 @@
-import * as helpers from "./utils/helpers";
+import * as helpers from "../utils/helpers";
 
 const searchInput = document.getElementById("recipe");
 const searchButton = document.getElementById("searchRecipe");
@@ -13,14 +13,13 @@ async function getMeals(endpoint, param) {
   return fetch(helpers.buildUrl(endpoint, param) + meal)
     .then((response) => response.json())
     .then((data) => {
-      console.log("Se crean las cards con los resultados");
       meals = data.meals;
       helpers.createLabelTotalMeals(totalMeals, meal, meals.length, endpoint);
       helpers.createCard(mealResults, meals);
     })
     .catch(function (err) {
       if (meals == null) {
-        console.log("No se encontraron resultados");
+        console.log("Not found");
         helpers.createLabelTotalMeals(totalMeals, meal);
         helpers.createLabelNotFound(mealResults);
       } else {
@@ -59,13 +58,22 @@ const getMealsByCategory = async (category) => {
     .then((res) => res.json())
     .then(({ meals }) => meals)
     .catch((e) => "Error fetching meals.");
-
-  let showMeals = document.getElementById("meals");
-  showMeals.replaceChildren();
-  meals.forEach((meal) => {
-    showMeals.appendChild(helpers.createCardCategories(meal.strMealThumb, meal.strMeal));
+    
+    let showMeals = document.getElementById("meals");
+    showMeals.replaceChildren();
+    meals.forEach(async (meal) => {
+    let mealDesc = await getMealById(meal.idMeal);
+    showMeals.appendChild(helpers.createCardCategories(meal.strMealThumb, meal.strMeal, mealDesc));
   });
 };
+
+const getMealById = async (id) => {
+  let meal = await fetch(helpers.buildUrl('lookup', 'i') + id)
+  .then(res => res.json())
+  .then(({meals}) => meals[0])
+
+  return meal;
+}
 
 const showCategories = async () => {
   let categories = await fetch(helpers.buildUrl('categories', ''))
