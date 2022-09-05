@@ -121,6 +121,11 @@
   opacity: 85%;
 }
 
+.preguntaDescripcionProyecto{
+  font-size: 1rem;
+  text-align: center;
+}
+
 .contenedorPrincipal .hijoContenedorPrincipal:nth-child(even){
   background-image: linear-gradient(to bottom right, #ffffff,#e2b099);
 }
@@ -140,6 +145,19 @@
 
 .contenedorImagen img{
   height: 90%;
+}
+
+.contenedorTexto{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  width: 100%;
+}
+
+.contenedorTexto p{
+  font-size: .8rem;
+  padding: 20px;
 }
 
 .contenedorListaAtributos{
@@ -193,89 +211,6 @@
   font-weight: bold;
   color: #ffffff;
   border-radius: 50%;
-}
-
-@media only screen and (max-width: 1400px) {
-
-  .contenedorPrincipal{
-    height: 60vh;
-  }
-
-  .parrafoDescripcionTeam{
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  .contenedorPrincipal{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 62vh;
-  }
-
-  .hijoContenedorPrincipal{
-    width: 80%;
-    height: 16%;
-    background-color: #ffffff;
-    flex-direction: row;
-    justify-content: center;
-    opacity: 85%;
-  }
-
-  .contenedorImagen{
-    height: 100%;
-    width: 25%;
-  }
-
-  .contenedorImagen img{
-    height: 80%;
-  } 
-
-  .contenedorListaAtributos{
-    width: 75%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .listaAtributos{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 7%;
-    height: 100%;
-    width: 100%;
-    margin-left: 0px;
-  }
-
-  .contenedorNumeroTarjeta{
-    margin-top: -20px;
-    margin-left: -20px;
-    border: solid 3px #b83a00;
-    height: 60%;
-    width: 14%;
-  }
-  
-  .numeroTarjeta{
-    font-size: 1.5rem;
-  }
-
-  .listaAtributos li{
-    font-size: .6rem;
-    padding: 2px;
-    width: 90%;
-  }
-
-  .lemaEquipo{
-    font-size: 1.1rem;
-  }
-
-  .contenedorLemaEquipo{
-    height: 11.6vh;
-  }
 }
 
 @media only screen and (max-width: 900px) {
@@ -364,6 +299,25 @@
     height: 11.6vh;
   }
 
+  .preguntaDescripcionProyecto{
+    font-size: .6rem;
+    text-align: center;
+  }
+  
+  .contenedorTexto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65%;
+    width: 100%;
+  }
+  
+  .contenedorTexto p{
+    font-size: .5rem;
+    padding: 20px;
+  }
+  
+
 }
 
 
@@ -420,7 +374,7 @@
 
   .listaAtributos li{
     font-weight: bold;
-    font-size: .25rem;
+    font-size: .20rem;
     width: 90%;
     padding: 5px;
     color: #000000;
@@ -464,5 +418,23 @@
     border-radius: 50%;
   }  
 
-}
+  .preguntaDescripcionProyecto{
+    font-size: .7rem;
+    text-align: center;
+  }
+  
+  .contenedorTexto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65%;
+    width: 100%;
+  }
+  
+  .contenedorTexto p{
+    font-size: .5rem;
+    padding: 5px;
+  }
+  
 
+}
