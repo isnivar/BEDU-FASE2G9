@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recetario BEDU</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-orange">
+      <div class="container">
+        <a class="navbar-brand" href="../index.html">TEAM 9</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="meals.html">Recipe book</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="team.html">Team</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="container mt-4">
+    <label class="form-label">Search recipes</label>
+    <div class="input-group has-validation">
+      <div class="form-floating" id="input">
+        <input type="text" class="form-control" id="recipe" placeholder="Example: rice" required autocomplete="off">
+        <label for="recipe">Introduce the name or code of the meal</label>
+      </div>
+      <div class="invalid-feedback">
+        <label>Please, introduce the name of the recipe</label>
+      </div>
+    </div>
+    <div class="mt-4">
+      <button type="submit" class="btn btn-bd-primary" id="searchRecipe">Search</button>
+      <button type="submit" class="btn btn-bd-secondary" id="random">Search aleatory recipe</button>
+    </div>
+  </section>
+
+  <section class="container mt-4">
+    <div>
+      <h3 id="totalMeals"></h3>
+    </div>
+    <div class="row" id="mealResults">
+    </div>
+  </section>
+
+  <section id="categorias" class="container mt-4">
+    <h2>What would you like to eat?</h2>
+  </section>
+  <section class="container mt-4">
+    <div class="row" id="meals"></div>
+  </section>
+</body>
+</html>
